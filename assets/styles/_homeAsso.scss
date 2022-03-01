@@ -1,0 +1,12 @@
+.Asso {
+    min-height: 43vh;
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.Asso::before {
+    content:"";
+    opacity: 0.25;
+    background-color: rgba(0,0,0,0.25);
+}

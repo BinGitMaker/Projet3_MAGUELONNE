@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier des évenements{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+        <h1 class="text-center text-uppercase mb-5">{{ 'concerts et spectacles'|trans }}</h1>
+        {% set previous_year = '' %}
+        {% set previous_month = '' %}
+        <div class="row mb-5">
+            <div class="col-12">
+                {% for event in pagination %}
+                    <article>
+                        <div class="row g-0">
+                            <div class="col-md-2 bg-primary d-flex flex-column justify-content-center">
+                                <time class="h4 text-light text-center p-3">{{ event.date|format_date('full', locale=app.request.locale) }}</time>
+                            </div>
+                            <div class="col-md-1 bg-primary mb-3 mb-md-0"></div>
+                            <div class="col-md-9 card-event" >
+                                <div class="d-flex flex-column d-none d-md-flex">
+                                    {% if event.date|date('Y') != previous_year or event.date|date('F') != previous_month %}
+                                        <h2 class="text-center text-primary text-uppercase mb-3">
+                                            {{ event.date|format_date('medium', locale=app.request.locale, pattern="MMMM") }}
+                                            - {{ event.date|date('Y') }}
+                                        </h2>
+                                    {% endif %}
+                                </div>
+                                <div class="row g-0 gx-md-4 p-4 bg-white border border-3 border-primary mb-5">
+                                    <div class="col-md-3 mb-4 mb-lg-0">
+                                        <img src="{{ event.poster }}" class="img-fluid rounded-start"
+                                             alt="{{ event.alt }}">
+                                    </div>
+                                    <div class="col-md-9 d-flex flex-column justify-content-around">
+                                        <div>
+                                            <div class="d-flex justify-content-center mt-lg-2 mx-lg-2">
+                                                <p class="">{{ event.date|format_date('full', locale=app.request.locale) }} </p>
+                                                <h3 class="ms-auto me-auto text-primary">{{ event.title|trans }}</h3>
+
+                                            </div>
+                                        </div>
+                                        <p class="card-text px-lg-2">{{ event.text }}</p>
+                                        <p>
+                                            {{ 'Durée'|trans }}
+                                            : {{ event.duration }} minutes.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+
+                    {% set previous_year = event.date|date('Y') %}
+                    {% set previous_month = event.date|date('F') %}
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 offset-md-2 col-md-8 d-flex justify-content-center">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

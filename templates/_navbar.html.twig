@@ -1,0 +1,43 @@
+<nav class="navbar row p-3 navbar-light custom-navbar navbar-expand-lg bg-secondary fixed-top shadow">
+    <div class="container col-2 justify-content-center"><a class="navbar-brand  logo" href="{{ path('home') }}">Maguelonne</a>
+    </div>
+    <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav">
+        <span class="visually-hidden">Toggle navigation</span>
+        <span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav ">
+            {% set links = [
+                {'title': 'Accueil'|trans, 'path': 'home'},
+                {'title': 'Blog'|trans, 'path': 'article_index'},
+                {'title': 'Association'|trans, 'path': 'association_index'},
+                {'title': 'Agenda'|trans, 'path': 'event_index'},
+                {'title': 'Artistes'|trans, 'path': 'artist_index'},
+                {'title': 'Sites amis'|trans, 'path': 'friendLink_index'},
+            ] %}
+            {% for link in links %}
+                <li class="nav-item mx-4 my-auto ms-lg-0">
+                    <a class="nav-link text-decoration-none hover {{ app.request.pathinfo == path(link.path) ? 'active' }}"
+                            {{ app.request.pathinfo == path(link.path) ? 'aria-current="page"' }} href="{{ path(link.path) }}">
+                        {{ link.title }}
+                    </a>
+                </li>
+            {% endfor %}
+            <li class="nav-item mx-2 ms-lg-4 dropdown">
+                <button class="btn border rounded dropdown-toggle" type="button" id="translationAvailable" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <img src="{{ asset('build/images/flags/' ~ app.request.locale ~ '.png') }}" alt="{{ app.request.locale }}" >
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-label="{{ 'Changer de langue'|trans }}">
+                    {% for lang in navigation.links|sort %}
+                        <li>
+                            <a class="dropdown-item" href="{{ lang.path }}">
+                                 <img class="me-2" src="{{ asset('build/images/flags/' ~ lang.locale ~ '.png') }}" alt="{{ lang.title }}" >
+                                {{ lang.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

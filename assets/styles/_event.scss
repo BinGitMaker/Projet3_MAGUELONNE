@@ -1,0 +1,5 @@
+.card-event {
+  @include media-breakpoint-up(md) {
+    margin: 0 -4rem;
+  }
+}

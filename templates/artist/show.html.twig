@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artist{% endblock %}
+
+{% block body %}
+
+        <div>
+            <h1 class="text-center py-5 mt-3">
+            {{ artist.name }}
+            </h1>
+        </div>
+          <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-10 col-md-8 col-lg-4 mb-5">
+                    <div class="card shadow border-primary">
+                    <img class="card-img-top img-fluid" src="{{ vich_uploader_asset(artist) }}" alt="{{ artist.alt }}">
+                        <div class="card-body p-2-4">
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-3">{{ 'Nationalité'|trans }} : {{ artist.nationality }}</li>
+                                <li class="mb-3">{{ 'Registre musical'|trans }} : {{ artist.repository }}</li>
+                                <li class="mb-3">{{ 'Instruments'|trans }} : </li>
+                          </ul>
+                            <div class="col-10">
+                             <h4 class="text">{{ 'Compagnie-Brand'|trans }} :</h4>
+                              <ul class="list-inline">
+                               <li class="list-inline-item">2020-2021 :</li>
+                               <li class="list-inline-item">{{ 'Nom de la compagnie'|trans }}</li>
+                              </ul>
+                          </div>
+                          <div class="col-10">
+                             <h4 class="text">{{ 'Études'|trans }}:</h4>
+                              <ul class="list-inline">
+                               <li class="list-inline-item">2020-2021 :</li>
+                               <li class="list-inline-item">{{ 'Nom da la compagnie'|trans }}</li>
+                              </ul>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="col-lg-8">
+                <div class="ps-lg-1-6 ps-xl-5">
+                <div class="mb-5">
+                    <div class="text-start mb-1-6">
+                        <h2 class="mb-0 text-primary">{{ 'Biographie'|trans }}</h2>
+                       </div>
+                          {{ artist.body|raw }}
+                        {% if artist.video %}
+                        <div class ="video__container">
+                          <iframe class="w-100 artist-video" src="{{ artist.video }}"></iframe>
+                        </div>
+                      {% endif %}
+                      {% if artist.audio %}
+                        <div class ="audio__container">
+                          <iframe class="w-100" src="{{ artist.audio }}"></iframe>
+                        {% endif %}
+                        </div>
+                      </div>
+                   </div>
+              </div>
+           </div>
+        </div>
+    <a href="{{ path('artist_index') }}" class="btn btn-primary m-4"><i class="bi bi-arrow-left"></i> {{ 'Retour aux CV'|trans }}</a>
+{% endblock %}

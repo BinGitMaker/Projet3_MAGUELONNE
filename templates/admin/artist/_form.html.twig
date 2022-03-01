@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+<div class="mb-4">
+	{{ form_row(form.name) }}
+	{{ form_row(form.photoFile) }}
+	{{ form_row(form.alt) }}
+	{{ form_row(form.slug) }}
+	{{ form_row(form.audio) }}
+	{{ form_row(form.video) }}
+	{{ form_row(form.body) }}
+	{{ form_row(form.nationality) }}
+	{{ form_row(form.repository) }}
+	{{ form_row(form.instruments) }}
+	<button class="btn btn-success d-block w-100">{{ button_label|default('Publier') }}
+	</button>
+
+</div>
+{{ form_end(form) }}

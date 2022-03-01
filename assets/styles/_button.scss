@@ -1,0 +1,19 @@
+
+.dropdown-item {
+    color: color-contrast($secondary, $color-contrast-dark);
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    //background-color: $secondary;
+    border: 0;
+
+}
+
+.btn-lg {
+    padding: 1.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+}
+
+
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}"/>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('admin') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('admin') }}
+    {% endblock %}
+</head>
+<body class="h-100">
+
+{% include "admin/_nav.html.twig" %}
+<main class="main-container">
+{#    {% include 'admin/_form_locale_nav.html.twig' %}#}
+    <div class="container-fluid">
+        {% block body %}{% endblock %}
+    </div>
+</main>
+</body>
+</html>

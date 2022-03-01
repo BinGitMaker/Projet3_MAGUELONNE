@@ -1,0 +1,31 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des catégories d'articles
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">Administration des catégories d'articles</h1>
+	<div class="container my-2 my-lg-5">
+		<div class="row d-flex flex-lg-row justify-content-center">
+		  <a href="{{ path('admin_articleCategory_new') }}" class="btn btn-success col-12 col-lg-4 py-3 mb-4 mb-lg-0 text-uppercase">
+			<i class="bi bi-plus-lg"></i>
+			Ajouter une nouvelle catégorie
+		  </a>
+		</div>
+	  </div>
+	<div class="container d-flex justify-content-lg-around col-lg-10 ">
+		<div class="row">
+
+			{% for article_category in article_categories %}
+				<div class="col-12 col-xl-6 ">
+					<div class="card m-3 shadow-lg">
+						<div class="card-body">
+							<h3 class="m-0">{{ article_category.name }}</h3>
+							<a href="{{ path('admin_articleCategory_edit', {'id': article_category.id}) }}" class="btn btn-primary">Modifier</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+const form = document.getElementById("formFilter");
+document.querySelectorAll("[data-remove-filter]").forEach((elem) => {
+elem.addEventListener("click", (event) => {
+const id = event.currentTarget.getAttribute("data-id");
+console.log(id)
+form.querySelector(".form-check-input[value='" + id + "']").checked = false;
+form.submit();
+})
+})
+})
+	</script>
+{% endblock %}
+
+{% block title %}Admin : tous les articles{% endblock %}
+
+{% block body %}
+	<h1 class="d-flex justify-content-center">Administration des Articles</h1>
+	<div class="container mt-2 mb-4">
+  	<div class="container my-2 my-lg-5">
+		<div class="row d-flex flex-lg-row justify-content-center">
+			<a href="{{ path('admin_article_new') }}" class="btn btn-success col-12 col-lg-4 py-3 mb-4 mb-lg-0 text-uppercase">
+				<i class="bi bi-plus-lg"></i>
+				Ajouter un nouvel article
+			</a>
+		</div>
+	</div>
+		<div class="row d-flex flex-lg-row justify-content-lg-evenly justify-content-center">
+			<div class="col-12 col-lg-4 mb-4 mb-lg-0">
+				<div class="dropdown">
+					<button type="button" class="btn btn-lg btn-primary w-100 dropdown-toggle shadow text-uppercase" data-bs-display="static" data-bs-toggle="dropdown" data-bs-auto-close="outside">{{ 'Catégories'|trans }}</button>
+					<div class="dropdown-menu dropdown-menu-lg-end w-100 p-3 shadow ">
+						{{ form_start(formCategoryFilter, {"method": "get", "attr": {"id": "formFilter"}}) }}
+						{{ form_widget(formCategoryFilter) }}
+						{{ form_end(formCategoryFilter) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row justify-content-lg-center">
+			<div class="col-lg-9 col-12">
+
+				{% if categories %}
+					<div class="mb-4">
+						<h3>Filtres sélectionnés</h3>
+						{% for category in categories %}
+							<button data-id="{{ category.id }}" data-remove-filter="" class="btn btn-info fs-5">{{ category.name }}
+								x</button>
+						{% endfor %}
+					</div>
+				{% endif %}
+				<div class="mb-3 d-flex justify-content-between">
+					<span>{{ pagination.getTotalItemCount }}
+						articles</span>
+
+					<span>page
+						{{ pagination.currentPageNumber }}
+						/
+						{{ (pagination.getTotalItemCount / paginationLimit)|round(0, 'ceil') }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% for article in pagination %}
+		<div class="container">
+			<div class="row justify-content-lg-center">
+				<div class="col-lg-9 col-12">
+					<div class="card mb-3 shadow-lg">
+						<div class="row no-gutters">
+							<div class="col-md-4 mx-auto">
+								{% set src = article.poster
+									? vich_uploader_asset(article)
+									: 'https://fakeimg.pl/350x200/?text=aucune image'
+								%}
+								<img src="{{ src }}" class="card-img img-fluid" alt="...">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<div class="d-flex flex-column flex-lg-row justify-content-start">
+										<h5 class="card-title me-auto">{{ 'Article écrit le'|trans }}
+											:
+											{{ article.createdAt ? article.createdAt|date('d-m-Y') : '' }}</h5>
+										<strong class="mx-lg-auto">{{ 'Temps de lecture'|trans }}
+											:
+											{{ article.duration }}
+											minutes</strong>
+										<h5 class="ms-lg-auto">{{ 'Catégorie'|trans }}
+											:
+											{{ article.category.name }}</h5>
+									</div>
+									<h3 class="mb-0">{{ article.title }}</h3>
+									<p class="card-text">{{ article.summary|raw }}</p>
+
+									{{ include('admin/_forms_edit_add_translations.html.twig',
+                                        {
+                                            'translations': article.translations,
+                                            'edit_path': 'admin_article_edit',
+                                            'add_translation_path': 'admin_article_add_translation',
+                                            'id': article.id
+                                        }) }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endfor %}
+	{{ knp_pagination_render(pagination) }}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Ajout d'un artiste
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="d-flex justify-content-center">Ajout d'un nouvel artiste</h1>
+
+	{{ include('/admin/artist/_form.html.twig', {'button_label': 'Ajouter un artiste'}) }}
+
+{% endblock %}

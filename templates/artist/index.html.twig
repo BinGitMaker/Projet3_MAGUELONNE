@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trombinoscope des artistes{% endblock %}
+
+{% block body %}
+<h1 class="text-center my-5">{{ 'Trombinoscope des artistes'|trans }}</h1>
+
+<div class="container">
+<div class="row g-3">
+{% for artist in pagination %}
+    <div class="col-12 col-md-6 col-lg-4 mb-5">
+       <div class="card shadow">
+       <img class="card-img-top img-fluid" src="{{ vich_uploader_asset(artist) }}" alt="Card image cap">
+           <div class="card-body pt-5">
+               <h3 class="card-title text-center pb-4">{{ artist.name }}</h3>
+             <div class="text-center pb-5">
+                 <a href="{{ path('artist_show', {'slug': artist.slug}) }}" class="btn btn-primary btn-lg">{{ 'Consulter sa biographie'|trans }}</a>
+             </div>
+           </div>
+       </div>
+   </div>
+{% endfor %}
+{{ knp_pagination_render(pagination) }}
+</div>
+</div>
+{% endblock %}

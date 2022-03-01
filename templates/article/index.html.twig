@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById("formFilter");
+            document.querySelectorAll("[data-remove-filter]").forEach((elem) => {
+                elem.addEventListener("click", (event) => {
+                    const id = event.currentTarget.getAttribute("data-id");
+                    console.log(id)
+                    form.querySelector(".form-check-input[value='"+id+"']").checked = false;
+                    form.submit();
+                })
+            })
+        })
+    </script>
+{% endblock %}
+{% block title %}Page de blog{% endblock %}
+
+{% block body %}
+    <div class="container mt-2 mb-4">
+        <div class="row d-flex flex-lg-row justify-content-lg-evenly justify-content-center">
+            <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-lg btn-primary w-100 dropdown-toggle shadow text-uppercase"
+                            data-bs-display="static" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside">{{ 'Catégories'|trans }}</button>
+                    <div class="dropdown-menu dropdown-menu-lg-end w-100 p-3 shadow ">
+                        {{ form_start(formCategoryFilter, {"method": "get", "attr": {"id": "formFilter"}}) }}
+                        {{ form_widget(formCategoryFilter) }}
+                        {{ form_end(formCategoryFilter) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-9 col-12">
+
+                {% if categories %}
+                <div class="mb-4">
+                    <h3>{{ 'Filtres sélectionnés'|trans }}</h3>
+                    {% for category in categories %}
+                        <button data-id="{{ category.id }}" data-remove-filter="" class="btn btn-info fs-5">{{ category.name }} x</button>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="mb-3 d-flex justify-content-between">
+                    <span>{{ pagination.getTotalItemCount }} {{ 'articles'|trans }}</span>
+
+                    <span>{{ 'page'|trans }} {{ pagination.currentPageNumber }} / {{ (pagination.getTotalItemCount / paginationLimit)|round(0, 'ceil') }}</span>
+                </div>
+                {% for article in pagination %}
+
+                    <div class="card mb-4 shadow">
+                        <div class="row no-gutters">
+                            <div class="col-md-4 mx-auto">
+                                {% if article.poster %}
+                                <img src="{{ vich_uploader_asset(article) }}"
+                                     class="card-img img-fluid" alt="{{ 'aperçu de l\'article'|trans }} {{ article.title }}">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column flex-lg-row justify-content-start">
+                                        <time class="card-title me-auto">
+                                            <strong>{{ 'Date de publication'|trans }}</strong>
+                                            <br> {{ article.createdAt ? article.createdAt|date('d-m-Y') : '' }}
+                                        </time>
+                                        <div>
+                                            <strong class="mx-lg-auto">{{ 'Temps de lecture'|trans }}</strong>
+                                            <br>{{ article.duration }} {{ 'minutes'|trans }}</br>
+                                        </div>
+                                        <h5 class="ms-lg-auto">{{ 'Catégorie'|trans }}
+                                            : <span class="badge bg-info rounded-pill text-dark">{{ article.category.name }}</span></h5>
+                                    </div>
+                                    <h3 class="mb-0">{{ article.title }}</h3>
+                                    <div class="card-text">{{ article.summary|raw }}</div>
+                                    <a href="{{ path('article_show', {'slug': article.slug}) }}"
+                                       class="btn btn-primary text-uppercase stretched-link">{{ 'En lire plus'|trans }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <p>{{ 'Il n\'y a encore aucune publication dans cette catégorie'|trans }}.</p>
+
+                {% endfor %}
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

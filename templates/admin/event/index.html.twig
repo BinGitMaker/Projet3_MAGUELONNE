@@ -1,0 +1,52 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<h1 class="d-flex justify-content-center">Liste des évènements</h1>
+<div class="container my-2 my-lg-5">
+    <div class="row d-flex flex-lg-row justify-content-center">
+      <a href="{{ path('admin_event_new') }}" class="btn btn-success col-12 col-lg-4 py-3 mb-4 mb-lg-0 text-uppercase">
+        <i class="bi bi-plus-lg"></i>
+        Ajouter un nouvel évènement
+      </a>
+    </div>
+  </div>
+{% for event in events %}
+<div class="container">
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-10 col-12 mb-4">
+            <div class="card mb-3 shadow-lg">
+                <div class="row no-gutters">
+                    <div class="col-md-4 mx-auto">
+                        <img src="{{ event.poster }}" class="card-img img-fluid" alt="{{ event.alt }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="d-flex flex-column flex-lg-row justify-content-start">
+
+                                <dl>
+                                    <dt class="card-title me-auto">{{ 'Nom de l\'évènement'|trans }} :</dt>
+                                    <dd>{{ event.title }}</dd>
+                                    <dt class="mx-lg-auto">{{ 'Texte'|trans }} :</dt>
+                                    <dd>{{ event.text }}</dd>
+                                    <dt class="ms-lg-auto">{{ 'Date'|trans }} :</dt>
+                                    <dd>{{ event.date|format_time('short', locale=app.request.locale) }}</dd>
+                                    <dt class="ms-lg-auto">{{ 'Vidéo'|trans }} :</dt>
+                                    <dd>{{ event.video }}</dd>
+                                    <dt class="ms-lg-auto">{{ 'Durée'|trans }} :</dt>
+                                    <dd>{{ event.duration }}</dd>
+                                </dl>
+                            </div>
+                            <a href="{{ path('admin_event_edit', {'slug': event.slug}) }}" class="btn btn-primary">{{ 'Modifier'|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+
+{% endblock %}

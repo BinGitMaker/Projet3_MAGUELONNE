@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AssociationHome
+{% endblock %}
+
+{% block body %}
+
+	<main>
+		<section class="container">
+			<div class="d-flex p-5 align-items-center opacity-75 justify-content-center Asso position-relative" alt=" {{ content.alt }}" style="background-image: url( '{{ content.poster }}' )">
+				<h1 class="position-absolute display-4 text-light text-center">{{ content.title|trans }}</h1>
+			</div>
+			<div class="fs-5">
+				{{ content.body|raw }}
+			</div>
+		</section>
+		<section class="container">
+			<div class="row justify-content-around">
+				{% set links = [
+                    {'title': 'Agenda'|trans, 'path': 'event_index'},
+                    {'title': 'Artistes'|trans, 'path': 'artist_index'},
+                    ] %}
+				{% for link in links %}
+					<div class="col-md-4">
+						<a href="{{ path(link.path) }}" class="btn btn-primary shadow d-block mb-2 p-lg-5 p-2 p-md-4 fs-lg-2 fs-4 text-uppercase">
+							{{ link.title }}
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+	</main>
+{% endblock %}

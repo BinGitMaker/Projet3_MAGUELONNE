@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des sites amis
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">Administration des sites amis</h1>
+	<div class="container my-2 my-lg-5">
+		<div class="row d-flex flex-lg-row justify-content-center">
+		  <a href="{{ path('admin_friendlink_new') }}" class="btn btn-success col-12 col-lg-4 py-3 mb-4 mb-lg-0 text-uppercase">
+			<i class="bi bi-plus-lg"></i>
+			Ajouter un nouveau site ami
+		  </a>
+		</div>
+	  </div>
+
+	<div class="container">
+		<div class="row justify-content-center">
+			{% for friend_link in friend_links %}
+				<div class="row mb-3 justify-content-center">
+					<div class="col-md-6 mx-auto friendlinkcontent">
+						<img class="card-img-top img-fluid" src="{{ friend_link.image }}" alt="Card image cap">
+					</div>
+					<div class="col-6 align-self-center friendlinkcontent">
+						<div class="card-body">
+							<h3 class="card-title text-center">{{ friend_link.name }}</h3>
+							<p class="card-title text-center">{{ friend_link.description }}</p>
+							<div class="text-center">
+								<a href="{{ path('admin_friendlink_edit', {'id': friend_link.id}) }}" class="btn btn-primary">éditer</a>
+								<a href="{{ friend_link.link }}" class="btn btn-secondary">Aller sur le site</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

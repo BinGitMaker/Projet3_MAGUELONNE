@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edit FriendLink{% endblock %}
+
+{% block body %}
+    <h1>Editer FriendLink</h1>
+
+    {{ include('admin/friend_link/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_friendlink_index') }}">retour a la liste</a>
+
+    {{ include('admin/friend_link/_delete_form.html.twig') }}
+{% endblock %}

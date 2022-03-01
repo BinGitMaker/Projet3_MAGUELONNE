@@ -1,0 +1,32 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration du contenu
+{% endblock %}
+
+{% block body %}
+	<h1 class="d-flex justify-content-center mb-3">Administration du contenu web</h1>
+	<div class="container d-flex justify-content-lg-around col-lg-10 ">
+		<div class="row mt-3 ">
+			{% for content in contents %}
+				<div class="col-12 col-xl-6 ">
+					<div class="card m-3 shadow-lg">
+						<div class="card-body">
+							<h5>{{ content.title }}</h5>
+							{{ include('admin/_forms_edit_add_translations.html.twig',
+                                        {
+                                            'translations': content.translations,
+                                            'edit_path': 'admin_content_edit',
+                                            'add_translation_path': 'admin_content_add_translation',
+                                            'id': content.id
+                                        }) }}
+						</div>
+					</div>
+				</div>
+			{% else %}
+				<tr>
+					<td colspan="5">Aucun contenu web trouvé.</td>
+				</tr>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

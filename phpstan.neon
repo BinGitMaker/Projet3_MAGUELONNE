@@ -1,0 +1,42 @@
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+parameters:
+    excludePaths:
+        - src/DataFixtures
+        - src/Security
+        - src/Service/NavigationService.php
+    ignoreErrors:
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::findOneBy[A-Z][a-zA-Z]*\(\)#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::findBy[A-Z][a-zA-Z]*\(\)#'
+        - '#is never written, only read#'
+        - '#expects string, mixed given#'
+        - '#object\|null given#'
+        - '#expects App\Entity\[a-zA-Z0-9\\_]+|null, object|null given#'
+        - "#Cannot access offset 'email' on mixed#"
+        - "#Cannot access offset 'title' on mixed#"
+        - '#expects string|Symfony\Component\Mime\Address, mixed given#'
+        - '#Call to an undefined method Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface#'
+        - '#ArticleFixtures.php\:21#'
+        - '#ArtistFixtures.php\:21#'
+        - '#ArtistFixtures.php\:22#'
+        - '#ArtistFixtures.php:23#'
+        - '#TranslationInterface\:\:getTitle#'
+        - '#TranslationInterface\:\:setTitle#'
+        - '#TranslationInterface\:\:getSlug#'
+        - '#TranslationInterface\:\:setSlug#'
+        - '#TranslationInterface\:\:getBody#'
+        - '#TranslationInterface\:\:setBody#'
+        - '#TranslationInterface\:\:getAlt#'
+        - '#TranslationInterface\:\:setAlt#'
+        - '#TranslationInterface\:\:getSummary#'
+        - '#TranslationInterface\:\:setSummary#'
+        - '#TranslationInterface\:\:getName#'
+        - '#TranslationInterface\:\:setName#'
+        - '#TranslationInterface\:\:getRepository#'
+        - '#TranslationInterface\:\:getNationality#'
+        - '#TranslationInterface\:\:getInstruments#'
+    reportUnmatchedIgnoredErrors: false
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false

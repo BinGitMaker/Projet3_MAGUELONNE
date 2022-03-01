@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}FriendLink{% endblock %}
+
+{% block body %}
+    <h1>Liens amis</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ friend_link.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ friend_link.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ friend_link.image }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>{{ friend_link.link }}</td>
+            </tr>
+            <tr>
+                <th>Alt</th>
+                <td>{{ friend_link.alt }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('friend_link_index') }}">retour a la liste</a>
+
+    <a href="{{ path('friend_link_edit', {'id': friend_link.id}) }}">editer</a>
+
+    {{ include('friend_link/_delete_form.html.twig') }}
+{% endblock %}

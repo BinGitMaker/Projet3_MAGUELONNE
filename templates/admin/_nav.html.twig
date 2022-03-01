@@ -1,0 +1,30 @@
+<nav class="main-nav">
+	<div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+		<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+			<svg class="bi me-2" width="40" height="32">
+				<use xlink:href="#bootstrap"></use>
+			</svg>
+			<span class="fs-4">Maguelonne</span>
+		</a>
+		<hr>
+		<ul class="nav nav-pills flex-column mb-auto">
+			{% set links = [
+                {'title': 'Agenda', 'path': 'admin_event_index'},
+                {'title': 'Articles', 'path': 'admin_article_index'},
+                {'title': 'Artistes', 'path': 'admin_artist_index'},
+                {'title': 'Catégories d\'Articles', 'path': 'admin_articleCategory_index'},
+                {'title': 'Contenus web', 'path': 'admin_content_index'},
+                {'title': 'Sites amis', 'path': 'admin_friendlink_index'},
+                {'title': 'Se déconnecter', 'path': 'admin_home_logout'},
+            ] %}
+            {% for link in links %}
+                <li class="nav-item">
+                    <a href="{{ path(link.path) }}"
+                       class="nav-link {{ app.request.pathInfo == path(link.path) ? 'active' : 'text-white' }}">
+                        {{ link.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>

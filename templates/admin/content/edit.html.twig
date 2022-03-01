@@ -1,0 +1,18 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modifier le contenu de la page
+{% endblock %}
+
+{% block body %}
+	<h1 class="d-flex justify-content-center">
+		{{ 'Édition du contenu de la page'|trans }}
+	</h1>
+	{{ include('admin/content/_form.html.twig',
+	 {
+		'button_save_label': 'Sauvegarder'|trans,
+		}) }}
+	{% if (app.request.get('locale') != content.getDefaultLocale) %}
+		{{ include('admin/content/_delete_translation_form.html.twig') }}
+	{% endif %}
+	<a href="{{ path('admin_content_index') }}">{{ 'Revenir à la liste des contenus'|trans }}</a>
+{% endblock %}

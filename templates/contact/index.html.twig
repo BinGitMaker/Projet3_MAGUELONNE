@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}Maguelonne - Contactez-nous!
+{% endblock %}
+{% block body %}
+	<div class="d-flex justify-content-center">
+		<div class="col-md-5">
+			<h1>{{ 'Contactez-nous!'|trans }}</h1>
+			{{ form_start(contactForm) }}
+			{{ form_row(contactForm.name, { 'label': 'Votre nom'|trans }) }}
+			{{ form_row(contactForm.email, { 'label': 'Votre email'|trans}) }}
+			{{ form_row(contactForm.title, { 'label': 'Objet'|trans}) }}
+			{{ form_row(contactForm.message, { 'label': 'Votre message'|trans}) }}
+			<button class="btn btn-primary border mb-1">
+				{{ button_label|default('Envoyer'|trans) }}
+			</button>
+			{{ form_end(contactForm) }}
+		</div>
+	</div>
+{% endblock %}

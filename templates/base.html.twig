@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}" class="h-100">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+		{% for lang in navigation.links %}
+			<link rel="alternate" hreflang="{{ lang.locale }}" href="{{ navigation.generateUrl(lang.locale) }}">
+		{% endfor %}
+		<title>
+			{% block title %}Maguelonne
+			{% endblock %}
+		</title>
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+
+	<body class="d-flex flex-column h-100">
+		{% include '_navbar.html.twig' %}
+		<main class="flex-shrink-0">
+			{% include '_scroll_button.html.twig' %}
+			{% block body %}{% endblock %}
+		</main>
+		{{ render(controller('App\\Controller\\ContentController::renderTwig', {'identifier': 'footer'})) }}
+	</body>
+</html>

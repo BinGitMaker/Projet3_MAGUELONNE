@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home
+{% endblock %}
+
+{% block body %}
+
+	<main>
+		<section class="container">
+			<img class="img-fluid image-home mb-3" src="{{ content.poster }}" alt="{{ content.alt }}">
+			<h1 class="d-flex justify-content-center mb-4">{{ content.title }}</h1>
+			<div class="fs-5">
+				{{ content.body|raw }}
+			</div>
+		</section>
+		<section class="container">
+			<div class="row">
+				{% set links = [
+                    {'title': 'Blog'|trans, 'path': 'article_index'},
+                    {'title': 'Association'|trans, 'path': 'association_index'},
+                    {'title': 'Sites amis'|trans, 'path': 'friendLink_index'},
+                    ] %}
+				{% for link in links %}
+					<div class="col-md-4">
+						<a href="{{ path(link.path) }}" class="btn btn-primary shadow d-block mb-2 p-lg-5 p-2 p-md-4 fs-lg-2 fs-4 text-uppercase">
+							{{ link.title }}
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+	</main>
+{% endblock %}

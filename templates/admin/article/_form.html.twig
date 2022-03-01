@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+<div class="mb-4">
+    {{ form_row(form.title) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.summary) }}
+    {{ form_row(form.body) }}
+    {{ form_row(form.posterFile) }}
+    {{ form_row(form.createdAt) }}
+    {{ form_row(form.duration) }}
+    {{ form_row(form.alt) }}
+    <button class="btn btn-success d-block w-100">{{ button_save_label|default('Publier') }} </button>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,59 @@
+<div class="mt-5"></div>
+<footer class="p-4 mt-auto footer">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4">
+				<h5>{{ content.title }}</h5>
+				{{ content.body|raw }}
+			</div>
+			<div class="col-md-4">
+				<h5>{{ 'Mentions Légales'|trans }}</h5>
+				<ul class="nav flex-column">
+					{% set links = [
+						{'title': 'Accueil'|trans, 'path': 'home', 'slug': null},
+						{'title': 'Contact'|trans, 'path': 'contact', 'slug': null},
+						{'title': 'Mentions Légales'|trans, 'path': 'page_show', 'slug': 'mentions-legales'},
+						{'title': 'Politique de confidentialité'|trans, 'path': 'page_show', 'slug': 'politique-de-confidentialite'},
+						] %}
+					{% for link in links %}
+						<li class="nav-item mb-2 list-unstyled">
+							<a href="{{ path(link.path, {'slug': link.slug}) }}" class="nav-link p-0">{{ link.title }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<form>
+					<h5>{{ 'S\'inscrire à la newsletter'|trans }}</h5>
+					<p>{{ 'Inscrivez-vous pour recevoir réguliérement notre newsletter dans votre boîte mail.'|trans }}</p>
+					<div class="d-flex flex-wrap flex-lg-nowrap w-100 gap-2">
+						<label for="newsletter1" class="visually-hidden">{{ 'Adresse mail'|trans }}</label>
+						<input type="Email" name="email" class="form-control w-md-100" required="" placeholder="Email">
+						<button class="btn btn-info">{{ 'S\'abonner'|trans }}</button>
+					</div>
+				</form>
+			</div>
+		</div>
+			<div class="nav d-flex justify-content-center border-top">
+				<ul class="social list-unstyled d-flex flex-row me-auto align-self-center">
+					<li class="ms-3">
+						<a href="https://fr-fr.facebook.com/">
+							<i class='bx bxl-facebook-circle social_icon'></i>
+						</a>
+					</li>
+					<li class="ms-3">
+						<a href="https://www.instagram.com/">
+							<i class='bx bxl-instagram-alt social_icon'></i>
+						</a>
+					</li>
+					<li class="ms-3">
+						<a href="https://twitter.com/?lang=fr">
+							<i class='bx bxl-twitter social_icon'></i>
+						</a>
+					</li>
+				</ul>
+				<p class="inline-block me-auto">&copy; {{ "now"|date("Y") }} {{ 'Maguelonne. Tous droits réservés.'|trans }}</p>
+			</div>
+		</div>
+	</div>
+</footer>

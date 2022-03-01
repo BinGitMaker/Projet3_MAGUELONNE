@@ -1,0 +1,9 @@
+<form method="post" action="{{ path('admin_article_delete_translation', {
+    'id': article.id, 'locale': app.request.get('locale')
+}) }}"
+      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette traduction ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+    <button class="btn btn-warning">
+        <i class="bi bi-trash-fill"></i> Supprimer cette traduction
+    </button>
+</form>

@@ -1,0 +1,29 @@
+body {
+    padding-top: 6rem;
+}
+
+footer{
+    background-color: $blue-100;
+    font-size: smaller;
+}
+
+.btn-scroll {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1;
+    transform: translateX(calc(100% + 20px));
+    transition: transform .4s ease;
+    &.show {
+        transform: translateX(0);
+    }
+}
+
+.friendlinkcontent {
+    max-width: 540px;
+    min-width: 246px;
+}
+
+iframe.artist-video {
+    min-height: 450px;
+}

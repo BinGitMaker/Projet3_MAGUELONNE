@@ -1,0 +1,24 @@
+controllers:
+    resource: '../../src/Controller/**/*'
+    exclude:
+        - '../../src/Controller/Admin/'
+        - '../../src/Controller/HomeController.php'
+    type: annotation
+    prefix: /{_locale}
+    name_prefix: ''
+    requirements:
+        _locale: fr|en|ru|ja|de
+
+admin:
+    resource: '../../src/Controller/Admin/'
+    type: annotation
+    prefix: '/admin'
+    name_prefix: 'admin_'
+
+home:
+    resource: '../../src/Controller/HomeController.php'
+    type: annotation
+
+kernel:
+    resource: ../../src/Kernel.php
+    type: annotation

@@ -1,0 +1,63 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Administration des artistes
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center">Administration des artistes</h1>
+    <div class="container my-2 my-lg-5">
+        <div class="row d-flex flex-lg-row justify-content-center">
+            <a href="{{ path('admin_artist_new') }}"
+               class="btn btn-success col-12 col-lg-5 col-xl-3 py-3 mb-4 mb-lg-0">{{ 'Ajouter un nouvel artiste'|trans }}</a>
+        </div>
+    </div>
+    {% for artist in artists %}
+        <div class="container">
+            <div class="row justify-content-lg-center">
+                <div class="col-lg-12 col-12">
+                    <div class="card mb-3 shadow-lg">
+                        <div class="row no-gutters">
+                            <div class="col-md-4 mx-auto">
+                                <img src="{{ vich_uploader_asset(artist) }}" class="card-img img-fluid"
+                                     alt="{{ artist.alt }}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column flex-lg-row justify-content-start">
+
+                                        <dl>
+                                            <dt class="card-title me-auto">{{ 'Nom de l\'artiste'|trans }} :</dt>
+                                            <dd>{{ artist.name }}</dd>
+                                            <dt class="mx-lg-auto">{{ 'Registre musicale'|trans }} :</dt>
+                                            <dd>{{ artist.repository }}</dd>
+                                            <dt class="ms-lg-auto">{{ 'Instruments'|trans }} :</dt>
+                                            <dd>{{ artist.instruments ? artist.instruments|json_encode : '' }}</dd>
+                                            <dt class="ms-lg-auto">{{ 'Nationalité'|trans }} :
+                                            <dt>
+                                            <dd>{{ artist.nationality }}</dd>
+                                            <dt class="ms-lg-auto">{{ 'Vidéo'|trans }} :</dt>
+                                            <dd>{{ artist.video }}</dd>
+                                            <dt class="ms-lg-auto">{{ 'Audio'|trans }} :</dt>
+                                            <dd>{{ artist.audio }}</dd>
+                                        </dl>
+
+                                    </div>
+                                    {{ include('admin/_forms_edit_add_translations.html.twig',
+                                        {
+                                            'translations': artist.translations,
+                                            'edit_path': 'admin_artist_edit',
+                                            'add_translation_path': 'admin_artist_add_translation',
+                                            'id': artist.id
+                                        }) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+

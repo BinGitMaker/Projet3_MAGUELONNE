@@ -1,0 +1,35 @@
+.nav-link {
+    position: relative;
+    text-transform: uppercase;
+    color: rgba(color-contrast($secondary), .3);
+
+    &:hover {
+        color: rgba(color-contrast($secondary), .7);
+  }
+
+    &.active {
+        color: rgba(color-contrast($secondary), 1);
+  }
+
+    &:hover,
+    &.active {
+        text-decoration: underline;
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: $nav-link-padding-x/2;
+            right: $nav-link-padding-x/2;
+    }
+  }
+}
+.custom-navbar {
+}
+@include media-breakpoint-only(lg) {
+  .custom-navbar {
+    font-size: 0.75rem;
+  }
+}
+

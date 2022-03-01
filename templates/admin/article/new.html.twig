@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Nouvel Article{% endblock %}
+
+{% block body %}
+    <div class="mb-4">
+        <h1 class="d-flex justify-content-center">{{ 'Création d\'un nouvel article'|trans }}</h1>
+        {{ include('admin/article/_form.html.twig') }}
+        <a href="{{ path('admin_article_index') }}">{{ 'Revenir à la liste des articles'|trans }}</a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+    <h1>Agenda des évènements</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ event.title }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ event.text }}</td>
+            </tr>
+            <tr>
+                <th>Poster</th>
+                <td>{{ event.poster }}</td>
+            </tr>
+            <tr>
+                <th>Video</th>
+                <td>{{ event.video }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ event.date ? event.date|date('d-m-Y h:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ event.duration }}</td>
+            </tr>
+            <tr>
+                <th>Alt</th>
+                <td>{{ event.alt }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ event.slug }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_event_index') }}">Retour à la liste d'évènements</a>
+
+    <a href="{{ path('admin_event_edit', {'id': event.id}) }}">Modifier l'évènement</a>
+
+    {{ include('admin/event/_delete_form.html.twig') }}
+{% endblock %}

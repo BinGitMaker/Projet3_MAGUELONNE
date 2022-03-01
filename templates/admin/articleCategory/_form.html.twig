@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+    <div class="form-group position-relative pb-5 d-flex flex-column mb-3 offset-1 offset-md-3 offset-lg-4 col-10 col-md-6 col-lg-4 ">
+    {{ form_row(form.name) }}
+    <button class="btn btn-danger position-absolute bottom-0 end-0 border">{{ button_delete_label|default('Supprimer') }}</button>
+    <button class="btn row btn-primary bottom-0 border">{{ button_save_label|default('Publier') }} </button>
+    </div>
+
+{{ form_end(form) }}

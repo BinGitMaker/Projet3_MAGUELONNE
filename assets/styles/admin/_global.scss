@@ -1,0 +1,18 @@
+$nav-width: 280px;
+.main-nav {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  padding: 1rem;
+  width: $nav-width;
+  display: flex;
+  flex-direction: column;
+  background-color: $dark;
+  color: $white;
+}
+
+.main-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: $nav-width;
+}

@@ -1,0 +1,11 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Nouvelle Catégorie d'Articles{% endblock %}
+
+{% block body %}
+    <h1 class="d-flex justify-content-center">Création d\'une nouvelle catégorie d\'articles</h1>
+
+    {{ include('admin/articleCategory/_form.html.twig') }}
+
+    <a href="{{ path('admin_articleCategory_index') }}">Revenir à la liste des catégories d\'articles</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sites amis{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-5">{{ 'Sites amis'|trans }}</h1>
+
+    <div class="container">
+        {% for friend_link in friend_links %}
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-6 mx-auto friendlinkcontent">
+                    <img class="card-img-top img-fluid" src="{{ friend_link.image }}" alt="Card image cap">
+                </div>
+                <div class="col-6 align-self-center friendlinkcontent">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">{{ friend_link.name }}</h3>
+                        <p class="card-title text-center">{{ friend_link.description }}</p>
+                        <div class="text-center">
+                            <a href="{{ friend_link.link }}" class="btn btn-primary">{{ 'Aller sur le site'|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modifier les Categories d'Articles{% endblock %}
+
+{% block body %}
+<div>
+    <h1 class="d-flex justify-content-center">Édition de la catégorie d'articles</h1>
+
+    {{ include('admin/articleCategory/_form.html.twig', {'button_save_label': 'Publier'}) }}
+
+    <a href="{{ path('admin_articleCategory_index') }}">Retour à la liste des catégories d'articles</a>
+</div>
+{% endblock %}

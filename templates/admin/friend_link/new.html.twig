@@ -1,0 +1,11 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New FriendLink{% endblock %}
+
+{% block body %}
+    <h1>Create new FriendLink</h1>
+
+    {{ include('admin/friend_link/_form.html.twig') }}
+
+    <a href="{{ path('admin_friendlink_index') }}">back to list</a>
+{% endblock %}
